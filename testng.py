@@ -251,11 +251,19 @@ city_opts = sorted(df_wide["City"].dropna().unique().tolist()) if "City" in df_w
 comm_opts = sorted(df_wide["Community"].dropna().unique().tolist()) if "Community" in df_wide else []
 pin_opts  = sorted(df_wide["Pincode"].dropna().unique().tolist()) if "Pincode" in df_wide else []
 
-with c1: sel_city = st.multiselect("City", city_opts, placeholder="All")
-with c2: sel_comm = st.multiselect("Community", comm_opts, placeholder="All")
-with c3: sel_pin  = st.multiselect("Pincode", pin_opts,  placeholder="All")
+with c1:
+    sel_city = st.multiselect("City", city_opts, placeholder="All", key="filter_city")
+with c2:
+    sel_comm = st.multiselect("Community", comm_opts, placeholder="All", key="filter_comm")
+with c3:
+    sel_pin  = st.multiselect("Pincode", pin_opts,  placeholder="All", key="filter_pin")
 with c4:
-    start_m, end_m = st.select_slider("Date range (month)", options=months, value=(months[0], months[-1]))
+    start_m, end_m = st.select_slider(
+        "Date range (month)",
+        options=months,
+        value=(months[0], months[-1]),
+        key="filter_month_range"
+    )
 
 def apply_filters(dfw, dfl):
     dfw = dfw.copy(); dfl = dfl.copy()
@@ -1563,5 +1571,6 @@ with tab_insights:
         key="dl_trends_bottom",
     )
     st.dataframe(dfl_filt, use_container_width=True, height=420)
+
 
 
