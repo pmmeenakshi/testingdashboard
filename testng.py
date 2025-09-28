@@ -119,8 +119,11 @@ def load_and_prepare_auto(default_csv: Path, default_parquet: Path):
     long_df = long_df.drop(columns=["Metric_Month"]).sort_values(id_cols_present + ["Metric", "Date"])
     return df, long_df, months, str(src.resolve())
 
+
 # ---------------- Sidebar (upload) ----------------
 with st.sidebar:
+    st.button("Clear data cache", on_click=st.cache_data.clear)
+    st.button("Clear resource cache", on_click=st.cache_resource.clear)
     uploaded = st.file_uploader(
         "Upload dataset (CSV or Parquet)",
         type=["csv", "parquet"],
@@ -823,3 +826,4 @@ with tab_insights:
         key="dl_trends_bottom",
     )
     st.dataframe(dfl_filt, use_container_width=True, height=420)
+
