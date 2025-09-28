@@ -131,8 +131,10 @@ with st.sidebar:
     show_popup_charts = st.toggle(
         "Show charts in popups (slower)",
         value=False,
-        help="Renders mini charts inside each popup. Turn off for fast map updates."
+        help="Renders mini charts inside each popup. Turn off for fast map updates.",
+        key="toggle_popup_charts"     # ← add this
     )
+
 
 @st.cache_data(show_spinner=False)
 def load_uploaded(file) -> tuple[pd.DataFrame, pd.DataFrame, list[str], str]:
@@ -1562,3 +1564,4 @@ with tab_insights:
         key="dl_trends_bottom",
     )
     st.dataframe(dfl_filt, use_container_width=True, height=420)
+
