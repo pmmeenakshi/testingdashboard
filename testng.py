@@ -135,7 +135,6 @@ with st.sidebar:
         key="toggle_popup_charts"     # ← add this
     )
 
-
 @st.cache_data(show_spinner=False)
 def load_uploaded(file) -> tuple[pd.DataFrame, pd.DataFrame, list[str], str]:
     """Load uploaded CSV/Parquet with same prep as defaults."""
@@ -1564,4 +1563,5 @@ with tab_insights:
         key="dl_trends_bottom",
     )
     st.dataframe(dfl_filt, use_container_width=True, height=420)
+
 
